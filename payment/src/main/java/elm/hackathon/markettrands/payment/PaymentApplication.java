@@ -1,13 +1,13 @@
-package elm.hackathon.markettrands.user_management;
+package elm.hackathon.markettrands.payment;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class UserManagementApplication {
+public class PaymentApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(UserManagementApplication.class, args);
+		SpringApplication.run(PaymentApplication.class, args);
 	}
 
 }

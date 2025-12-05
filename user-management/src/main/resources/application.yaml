@@ -1,0 +1,8 @@
+spring:
+  application:
+    name: user-management
+
+server:
+  port: 6061
+  servlet:
+    context-path: /user-management

@@ -1,0 +1,8 @@
+spring:
+  application:
+    name: payment
+
+server:
+  port: 6060
+  servlet:
+    context-path: /payment
