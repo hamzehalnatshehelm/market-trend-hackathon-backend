@@ -1,7 +1,5 @@
 package elm.hackathon.markettrands.user_management.general.exception;
 
-import com.auth0.jwt.exceptions.JWTVerificationException;
-import com.auth0.jwt.exceptions.TokenExpiredException;
 import elm.hackathon.markettrands.user_management.general.enums.Language;
 import elm.hackathon.markettrands.user_management.general.exception.enums.ErrorCode;
 import elm.hackathon.markettrands.user_management.general.exception.schema.response.BaseError;
@@ -128,21 +126,21 @@ public class GlobalExceptionHandler {
         return exceptionHandlerUtil.commonReturn(new BaseException(errorCode));
     }
 
-    @ResponseBody
-    @ExceptionHandler(value = TokenExpiredException.class)
-    public ResponseEntity<BaseError> tokenExpiredExceptionHandler(TokenExpiredException tokenExpiredException) {
-        logException("TokenExpiredException", tokenExpiredException);
-        ErrorCode errorCode = ErrorCode.EXPIRED_AUTH_TOKEN;
-        return exceptionHandlerUtil.commonReturn(new BaseException(errorCode));
-    }
+//    @ResponseBody
+//    @ExceptionHandler(value = TokenExpiredException.class)
+//    public ResponseEntity<BaseError> tokenExpiredExceptionHandler(TokenExpiredException tokenExpiredException) {
+//        logException("TokenExpiredException", tokenExpiredException);
+//        ErrorCode errorCode = ErrorCode.EXPIRED_AUTH_TOKEN;
+//        return exceptionHandlerUtil.commonReturn(new BaseException(errorCode));
+//    }
 
-    @ResponseBody
-    @ExceptionHandler(value = JWTVerificationException.class)
-    public ResponseEntity<BaseError> jwtVerificationExceptionHandler(JWTVerificationException jwtVerificationException) {
-        logException("JWTVerificationException", jwtVerificationException);
-        ErrorCode errorCode = ErrorCode.AUTH_TOKEN_CAN_NOT_BE_TRUSTED;
-        return exceptionHandlerUtil.commonReturn(new BaseException(errorCode));
-    }
+//    @ResponseBody
+//    @ExceptionHandler(value = JWTVerificationException.class)
+//    public ResponseEntity<BaseError> jwtVerificationExceptionHandler(JWTVerificationException jwtVerificationException) {
+//        logException("JWTVerificationException", jwtVerificationException);
+//        ErrorCode errorCode = ErrorCode.AUTH_TOKEN_CAN_NOT_BE_TRUSTED;
+//        return exceptionHandlerUtil.commonReturn(new BaseException(errorCode));
+//    }
 
     @ResponseBody
     @ExceptionHandler(value = NoHandlerFoundException.class)

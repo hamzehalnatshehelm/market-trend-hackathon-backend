@@ -1,8 +1,8 @@
 -- Create a single database for all microservices
-CREATE DATABASE microservices_db;
+CREATE DATABASE market_trends_db;
 
 -- Connect to the database
-\c microservices_db;
+\c market_trends_db;
 
 -- ============================================================================
 -- CREATE SCHEMAS
@@ -19,10 +19,10 @@ CREATE SCHEMA payment;
 -- ============================================================================
 
 -- Create user for user-management service
-CREATE USER user_service WITH PASSWORD 'user_service_password';
+CREATE USER user_service WITH PASSWORD 'password';
 
 -- Create user for payment service
-CREATE USER payment_service WITH PASSWORD 'payment_service_password';
+CREATE USER payment_service WITH PASSWORD 'password';
 
 -- ============================================================================
 -- GRANT PERMISSIONS
