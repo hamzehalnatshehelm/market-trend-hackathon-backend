@@ -4,8 +4,8 @@ services:
   # Backend API Service
   api:
     build:
-      context: .
-      dockerfile: Dockerfile.node
+      context: user-management
+      dockerfile: Dockerfile
     ports:
       - "6061:6061"
     environment:
