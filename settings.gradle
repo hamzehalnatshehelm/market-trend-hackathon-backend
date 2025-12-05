@@ -1,0 +1,4 @@
+rootProject.name = 'market-trend'
+
+include 'user-management'
+include 'payment'

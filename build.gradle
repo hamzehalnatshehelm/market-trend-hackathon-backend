@@ -1,0 +1,134 @@
+/**
+ * PARENT BUILD.GRADLE - Multi-Module Spring Boot Project
+ * This file configures shared settings for all microservices in the project
+ */
+
+// ============================================================================
+// PLUGINS SECTION
+// ============================================================================
+plugins {
+    // Java plugin for compiling Java code
+    id 'java'
+
+    // Spring Boot plugin - manages Spring Boot dependencies and packaging
+    // 'apply false' means: declare the plugin but don't apply it to the parent
+    // Child modules will apply this plugin themselves
+    id 'org.springframework.boot' version '4.0.0'
+
+    // Dependency Management plugin - ensures consistent dependency versions
+    // across all modules without explicit version numbers
+    // 'apply false' for the same reason as above
+    id 'io.spring.dependency-management' version '1.1.7' // apply false
+}
+
+// ============================================================================
+// ALL PROJECTS SECTION
+// ============================================================================
+// Configuration applied to BOTH parent and all child modules
+allprojects {
+    // Maven group ID - used for publishing artifacts
+    // Change 'com.yourcompany' to your actual package name
+    group = 'elm.hackathon.markettrands'
+
+    // Version number for all modules in this project
+    version = '1.0.0'
+
+    // Where to download dependencies from
+    repositories {
+        mavenCentral()  // Maven Central Repository
+    }
+}
+
+// ============================================================================
+// SUBPROJECTS SECTION
+// ============================================================================
+// Configuration applied ONLY to child modules (user-management, payment, etc.)
+// NOT applied to the parent project
+subprojects {
+
+    // Apply plugins to each child module
+    apply plugin: 'java'
+    apply plugin: 'org.springframework.boot'
+    apply plugin: 'io.spring.dependency-management'
+
+    // ========================================================================
+    // JAVA CONFIGURATION
+    // ========================================================================
+    java {
+        toolchain {
+            // Specifies Java version for compilation and runtime
+            // All child modules will use Java 25
+            languageVersion = JavaLanguageVersion.of(25)
+        }
+    }
+
+    // ========================================================================
+    // COMMON DEPENDENCIES
+    // ========================================================================
+    // Dependencies that ALL child modules will inherit
+    dependencies {
+        // Core Spring Boot starter - included in every microservice
+        // Provides auto-configuration, logging, and basic Spring features
+        implementation 'org.springframework.boot:spring-boot-starter'
+
+        // Testing dependencies - JUnit 5, Mockito, Spring Test
+        // Note: No version numbers needed - managed by Spring Boot BOM
+        testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    }
+
+    // ========================================================================
+    // TEST CONFIGURATION
+    // ========================================================================
+    // Configure the 'test' task for all child modules
+    tasks.named('test') {
+        // Use JUnit Platform (JUnit 5) for running tests
+        useJUnitPlatform()
+    }
+}
+
+// ============================================================================
+// WHAT HAPPENS IN CHILD MODULES?
+// ============================================================================
+/*
+ * Child modules (user-management/build.gradle, payment/build.gradle) only need:
+ *
+ * dependencies {
+ *     // Add module-specific dependencies here
+ *     implementation 'org.springframework.boot:spring-boot-starter-web'
+ *     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+ *     runtimeOnly 'com.mysql:mysql-connector-j'
+ * }
+ *
+ * bootJar {
+ *     enabled = true  // If this module should create an executable JAR
+ * }
+ *
+ * jar {
+ *     enabled = false  // Disable plain JAR if using bootJar
+ * }
+ */
+
+// ============================================================================
+// KEY BENEFITS OF THIS STRUCTURE
+// ============================================================================
+/*
+ * 1. CENTRALIZED CONFIGURATION
+ *    - Java version, group, version defined once
+ *    - No duplication across modules
+ *
+ * 2. CONSISTENT DEPENDENCIES
+ *    - Spring Boot manages versions automatically
+ *    - No version conflicts between modules
+ *
+ * 3. SIMPLIFIED CHILD BUILD FILES
+ *    - Child modules only declare what makes them unique
+ *    - Common dependencies inherited from parent
+ *
+ * 4. EASY MAINTENANCE
+ *    - Update Java version or Spring Boot version in one place
+ *    - Changes apply to all modules automatically
+ *
+ * 5. INDEPENDENT DEPLOYMENTS
+ *    - Each microservice builds its own executable JAR
+ *    - Can be deployed and scaled independently
+ */
