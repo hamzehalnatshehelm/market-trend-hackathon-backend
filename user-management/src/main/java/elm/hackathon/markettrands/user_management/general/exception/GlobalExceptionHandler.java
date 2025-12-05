@@ -4,6 +4,7 @@ import elm.hackathon.markettrands.user_management.general.enums.Language;
 import elm.hackathon.markettrands.user_management.general.exception.enums.ErrorCode;
 import elm.hackathon.markettrands.user_management.general.exception.schema.response.BaseError;
 import elm.hackathon.markettrands.user_management.general.exception.schema.response.BaseException;
+import elm.hackathon.markettrands.user_management.general.exception.schema.response.BusinessException;
 import elm.hackathon.markettrands.user_management.general.exception.schema.response.DtoFieldInfo;
 import elm.hackathon.markettrands.user_management.general.exception.util.ExceptionHandlerUtil;
 import elm.hackathon.markettrands.user_management.general.util.UtilTranslate;
@@ -42,6 +43,13 @@ public class GlobalExceptionHandler {
             log.error("throwable: ", throwable);
         }
         return exceptionHandlerUtil.commonReturn(baseException);
+    }
+
+    @ResponseBody
+    @ExceptionHandler(value = BusinessException.class)
+    public ResponseEntity<String> businessExceptionHandler(BusinessException businessException) {
+        logException("BusinessException", businessException);
+        return ResponseEntity.badRequest().body(businessException.getMessage());
     }
 
     @ResponseBody

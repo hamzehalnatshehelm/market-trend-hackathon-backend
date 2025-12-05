@@ -8,16 +8,15 @@ import java.util.Date;
 @Entity
 @Table(name = "app_user")
 @Data
-public class AppUser {
+public class Otp {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    @Column(name = "name")
-    private String name;
-    @Column(name = "email")
-    private String email;
-    @Column(name = "mobile_number")
-    private String mobileNumber;
+    private int id;
+    @Column(name = "user_id")
+    private int userId;
+    @Column(name = "otp_number")
+    private String otpNumber;
     @Column(name = "creation_date")
     private Date creationDate;
     @Column(name = "last_modification_date")
