@@ -46,6 +46,15 @@ server:
   servlet:
     context-path: /user-management
 
+security:
+  jwt:
+    secret:
+      hex: 9f3c6e1a4b8d2f7c1e0d5a9c3b7e6f12a4c8d0b2f3e7c6a19d3b5f7e2c1a0d4b
+    issuer: user-management
+    expiration-minutes: 30
+
+
+
 
 
 
