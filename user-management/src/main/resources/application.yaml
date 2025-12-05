@@ -1,7 +1,9 @@
+#spring
 spring:
   application:
     name: user-management
 
+#server
 server:
   port: 6061
   servlet:
