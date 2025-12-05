@@ -123,6 +123,16 @@ CREATE TABLE market_trends
     orig_duty_per_qty  NUMERIC,
     cost_per_qty       NUMERIC,
 
+    port_type_name_en  VARCHAR(1000),
+    port_type_name_ar  VARCHAR(1000),
+    port_code          VARCHAR(1000),
+    codedesc           VARCHAR(1000),
+    engcodedesc        VARCHAR(1000),
+    section_arbc_desc  VARCHAR(1000),
+    section_eng_desc   VARCHAR(1000),
+    chapter_arbc_desc  VARCHAR(1000),
+    chapter_eng_desc   VARCHAR(1000),
+
     CONSTRAINT fk_market_trends_port_type
         FOREIGN KEY (fk_port_type_id)
             REFERENCES port_type (id)

@@ -23,7 +23,7 @@ services:
     <<: *service-defaults
     image: market-trends/market-trends:latest
     build:
-      context: .
+      context: ../market-trends
       dockerfile: Dockerfile
     container_name: market-trends
     ports:
