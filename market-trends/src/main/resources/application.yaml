@@ -1,0 +1,29 @@
+#spring
+spring:
+  application:
+    name: market-trends
+  datasource:
+    url: jdbc:postgresql://localhost:5432/market_trends_db
+    username: market_trends_service
+    password: password
+    driver-class-name: org.postgresql.Driver
+#    hikari:
+#      schema: market_trends
+  jpa:
+    defer-datasource-initialization: false
+    show-sql: true
+    hibernate:
+      ddl-auto: none
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        default_schema: market_trends
+  flyway:
+    user: market_trends_service
+    password: password
+
+#server
+server:
+  port: 6062
+  servlet:
+    context-path: /market-trends

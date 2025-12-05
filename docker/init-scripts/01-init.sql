@@ -14,6 +14,9 @@ CREATE SCHEMA user_management;
 -- Schema for payment service
 CREATE SCHEMA payment;
 
+-- Schema for market_trends service
+CREATE SCHEMA market_trends;
+
 -- ============================================================================
 -- CREATE USERS
 -- ============================================================================
@@ -23,6 +26,9 @@ CREATE USER user_service WITH PASSWORD 'password';
 
 -- Create user for payment service
 CREATE USER payment_service WITH PASSWORD 'password';
+
+-- Create user for market_trends service
+CREATE USER market_trends_service WITH PASSWORD 'password';
 
 -- ============================================================================
 -- GRANT PERMISSIONS
@@ -62,8 +68,26 @@ ALTER DEFAULT PRIVILEGES IN SCHEMA payment
 -- Set search path for payment_service
 ALTER USER payment_service SET search_path TO payment, public;
 
+-- Grant all privileges on payment schema to market_trends_service
+GRANT ALL ON SCHEMA payment TO market_trends_service;
+GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA payment TO market_trends_service;
+GRANT ALL PRIVILEGES ON ALL SEQUENCES IN SCHEMA payment TO market_trends_service;
+GRANT ALL PRIVILEGES ON ALL FUNCTIONS IN SCHEMA payment TO market_trends_service;
+
+-- Set default privileges for future objects in market_trends schema
+ALTER DEFAULT PRIVILEGES IN SCHEMA payment
+    GRANT ALL ON TABLES TO market_trends_service;
+ALTER DEFAULT PRIVILEGES IN SCHEMA payment
+    GRANT ALL ON SEQUENCES TO market_trends_service;
+ALTER DEFAULT PRIVILEGES IN SCHEMA payment
+    GRANT ALL ON FUNCTIONS TO market_trends_service;
+
+-- Set search path for market_trends_service
+ALTER USER market_trends_service SET search_path TO payment, public;
+
 -- ============================================================================
 -- OPTIONAL: Grant USAGE on public schema (if needed)
 -- ============================================================================
 GRANT USAGE ON SCHEMA public TO user_service;
 GRANT USAGE ON SCHEMA public TO payment_service;
+GRANT USAGE ON SCHEMA public TO market_trends_service;

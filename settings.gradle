@@ -1,4 +1,5 @@
 rootProject.name = 'market-trend'
 
 include 'user-management'
+include 'market-trends'
 include 'payment'
