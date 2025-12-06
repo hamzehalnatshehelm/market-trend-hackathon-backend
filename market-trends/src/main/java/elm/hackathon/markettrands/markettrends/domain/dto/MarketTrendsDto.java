@@ -2,6 +2,7 @@ package elm.hackathon.markettrands.markettrends.domain.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import elm.hackathon.markettrands.markettrends.constant.ConstantDatePattern;
+import elm.hackathon.markettrands.markettrends.enums.MarketTrendsDirection;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -19,7 +20,7 @@ public class MarketTrendsDto {
     private Long id;
 
     private LocalDate month;
-    private String direction;
+    private MarketTrendsDirection direction;
     private String typeId;
     private String hrmnzdCode;
     private String itemDescAr;

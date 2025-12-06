@@ -1,5 +1,6 @@
 package elm.hackathon.markettrands.markettrends.domain;
 
+import elm.hackathon.markettrands.markettrends.enums.MarketTrendsDirection;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -28,8 +29,9 @@ public class MarketTrends implements Serializable {
     @Column(name = "month", nullable = false)
     private LocalDate month;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "direction", length = 50)
-    private String direction;
+    private MarketTrendsDirection direction;
 
     @Column(name = "type_id", length = 1, nullable = false)
     private String typeId;
