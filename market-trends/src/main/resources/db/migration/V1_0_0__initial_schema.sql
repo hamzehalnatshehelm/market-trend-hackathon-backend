@@ -104,6 +104,7 @@ CREATE TABLE market_trends
     direction         VARCHAR(50),
     type_id           VARCHAR(1)  NOT NULL,
     fk_port_type_id   NUMERIC(9)  NOT NULL,
+    fk_port_id        VARCHAR(9)  NOT NULL,
     fk_section_id     VARCHAR(10) NOT NULL,
     fk_chapter_cd_id  VARCHAR(10) NOT NULL,
     hrmnzd_code       VARCHAR(16) NOT NULL,
@@ -125,7 +126,6 @@ CREATE TABLE market_trends
 
     port_type_name_en VARCHAR(1000),
     port_type_name_ar VARCHAR(1000),
-    port_code         VARCHAR(1000),
     codedesc          VARCHAR(1000),
     engcodedesc       VARCHAR(1000),
     section_arbc_desc VARCHAR(1000),
@@ -136,6 +136,12 @@ CREATE TABLE market_trends
     CONSTRAINT fk_market_trends_port_type
         FOREIGN KEY (fk_port_type_id)
             REFERENCES port_type (id)
+            ON DELETE RESTRICT
+            ON UPDATE CASCADE,
+
+    CONSTRAINT fk_market_trends_port
+        FOREIGN KEY (fk_port_id)
+            REFERENCES port (port_code)
             ON DELETE RESTRICT
             ON UPDATE CASCADE,
 
