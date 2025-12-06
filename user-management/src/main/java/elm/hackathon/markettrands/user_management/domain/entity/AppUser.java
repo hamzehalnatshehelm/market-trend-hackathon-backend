@@ -22,4 +22,14 @@ public class AppUser {
     private Date creationDate;
     @Column(name = "last_modification_date")
     private Date lastModifiedDate;
+
+    @PrePersist
+    private void insertCreationAndLastModifiedDate() {
+        this.creationDate = new Date();
+        this.lastModifiedDate = new Date();
+    }
+    @PreUpdate
+    private void updateLastModifiedDate() {
+        this.lastModifiedDate = new Date();
+    }
 }

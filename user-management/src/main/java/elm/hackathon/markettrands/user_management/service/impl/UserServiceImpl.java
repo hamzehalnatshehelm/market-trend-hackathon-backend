@@ -29,7 +29,7 @@ public class UserServiceImpl implements UserService {
     public UserDTO getUserByEmail(String email) {
         Optional<AppUser> appUserOptional = userRepository.findByEmail(email);
         if(appUserOptional.isEmpty()){
-            throw new BusinessException("User not found");
+            return null;
         }
         return userMapper.toDto(userRepository.findByEmail(email).get());
     }

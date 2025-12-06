@@ -29,11 +29,12 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
                 .csrf(csrf -> csrf.disable())
-                //.cors(Customizer.withDefaults()) // ✅ enable CORS handling
+//                .cors(Customizer.withDefaults()) // ✅ enable CORS handling
                 .cors(httpSecurityCorsConfigurer -> httpSecurityCorsConfigurer.disable())
                 .sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/auth/**").permitAll()
+                        .requestMatchers("/api/register").permitAll()
                         .anyRequest().authenticated()
                 )
                 .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
@@ -45,7 +46,7 @@ public class SecurityConfig {
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration config = new CorsConfiguration();
         // Replace with your FE origin(s)
-        config.setAllowedOrigins(List.of("http://localhost:3000", "http://127.0.0.1:3000","http://localhost:6061", "http://127.0.0.1:6061"));
+        config.setAllowedOrigins(List.of("http://10.44.146.84:3000", "http://10.44.146.84:3000","http://localhost:6061", "http://127.0.0.1:6061"));
         config.setAllowedMethods(List.of("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"));
         config.setAllowedHeaders(List.of("Authorization", "Content-Type", "X-Requested-With"));
         config.setExposedHeaders(List.of("Authorization", "Location")); // if you return token/location
