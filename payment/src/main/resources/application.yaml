@@ -1,8 +1,82 @@
+#spring
 spring:
   application:
     name: payment
+  datasource:
+    url: jdbc:postgresql://localhost:5432/market_trends_db
+    username: payment_user
+    password: password
+    driver-class-name: org.postgresql.Driver
+    hikari:
+      schema: payment
+  jpa:
+    hibernate:
+      ddl-auto: none
+    show-sql: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        globally_quoted_identifiers: false
+        default_schema: payment
 
+
+
+  flyway:
+    user: payment_user
+    password: password
+    baseline-on-migrate: true
+    default-schema: payment
+
+
+
+  mail:
+    host: localhost
+    port: 1025
+    properties:
+      mail:
+        smtp:
+          auth: false
+        starttls:
+          enable: true
+          required: true
+    threads:
+      virtual:
+        enabled: true
+
+
+#server
 server:
   port: 6060
   servlet:
     context-path: /payment
+
+security:
+  jwt:
+    secret:
+      hex: 9f3c6e1a4b8d2f7c1e0d5a9c3b7e6f12a4c8d0b2f3e7c6a19d3b5f7e2c1a0d4b
+    issuer: payment
+    expiration-minutes: 30
+
+
+
+feign:
+#  httpclient:
+#    enabled: false
+#  okhttp:
+#    enabled: true  # Prefer OkHttp with Boot 3.x
+  client:
+#    config:
+#      default:
+#        connectTimeout: 5000
+#        readTimeout: 15000
+#        loggerLevel: FULL
+#        retryer: default
+#        errorDecoder: ElmPayErrorDecoder
+#        requestInterceptors:
+#          - com.yourcompany.payments.client.config.DefaultHeadersInterceptor
+#      paymentGatewayClient: # Per-client overrides (optional)
+#        readTimeout: 20000
+#        loggerLevel: BASIC
+    payment:
+      url: https://pgx-qa-api.apps.devocp4.elm.sa:443
+
