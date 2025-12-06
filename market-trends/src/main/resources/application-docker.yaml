@@ -3,8 +3,8 @@ spring:
   application:
     name: market-trends
   datasource:
-    url: jdbc:postgresql://localhost:5432/market_trends_db
-    username: market_trends_user
+    url: jdbc:postgresql://postgres-db:5432/market_trends_db
+    username: market_trends_service
     password: password
     driver-class-name: org.postgresql.Driver
 #    hikari:
@@ -19,19 +19,11 @@ spring:
         dialect: org.hibernate.dialect.PostgreSQLDialect
         default_schema: market_trends
   flyway:
-    user: market_trends_user
+    user: market_trends_service
     password: password
-    schemas: market_trends
 
 #server
 server:
   port: 6062
   servlet:
     context-path: /market-trends
-
-security:
-  jwt:
-    secret:
-      hex: 9f3c6e1a4b8d2f7c1e0d5a9c3b7e6f12a4c8d0b2f3e7c6a19d3b5f7e2c1a0d4b
-    issuer: user-management
-    expiration-minutes: 30

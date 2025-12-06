@@ -1,11 +1,9 @@
-package elm.hackathon.markettrands.markettrends.entity;
+package elm.hackathon.markettrands.markettrends.domain;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.*;
-
-import java.io.Serializable;
 
 @Entity
 @Table(
@@ -20,13 +18,11 @@ import java.io.Serializable;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(of = "id")
-public class PortType implements Serializable {
-
-    private static final long serialVersionUID = 1L;
+public class PortType {
 
     @Id
     @Column(name = "id", nullable = false)
-    private Integer id;
+    private Long id;
 
     @NotBlank(message = "Port type name in English is required")
     @Size(max = 50, message = "Port type name in English must not exceed 50 characters")
