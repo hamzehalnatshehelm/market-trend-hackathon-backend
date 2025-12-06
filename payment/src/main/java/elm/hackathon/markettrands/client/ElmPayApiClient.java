@@ -13,7 +13,10 @@ import org.springframework.web.bind.annotation.RequestBody;
                 url= "${feign.client.payment.url}",
                 configuration = ElmPayApiClientConfig.class)
 public interface ElmPayApiClient {
-    @PostMapping(value = "/payment/api/product/createpaymentrequest")
+    @PostMapping(value = "/payment/api/product/createpaymentrequest",
+            consumes = "application/json",
+            produces = "application/json"
+    )
     PaymentCreationResponseDto createPayment(@RequestBody PaymentCreationRequestDto declarationNumber);
 
     @PostMapping(value = "/payment/api/product/inquirepaymentrequest")

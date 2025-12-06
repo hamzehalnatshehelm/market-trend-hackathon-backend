@@ -16,7 +16,8 @@ public class ElmPayApiClientInterceptor implements RequestInterceptor {
 
     @Override
     public void apply(RequestTemplate requestTemplate) {
-        requestTemplate.header("Content-Type", "application/json");
+//        requestTemplate.header("Content-Type", "application/json");
+        requestTemplate.header("Accept", "application/json");
         requestTemplate.header("ProductCode", "817");
         requestTemplate.header("ClientKey", "4E012D6C-7B3E-4D3A-9890-5E3C0815EA12");
         requestTemplate.header("MessageId", UUID.randomUUID().toString());
