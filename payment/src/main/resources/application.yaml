@@ -65,6 +65,9 @@ feign:
 #  okhttp:
 #    enabled: true  # Prefer OkHttp with Boot 3.x
   client:
+    config:
+      ELMPAY-API:
+        loggerLevel: FULL
 #    config:
 #      default:
 #        connectTimeout: 5000
@@ -81,4 +84,10 @@ feign:
       url:  https://pg-beta.api.elm.sa
     billing:
       url: https://elmx-bp-beta.api.elm.sa
+
+logging:
+  level:
+    org.springframework.cloud.openfeign: DEBUG
+    feign: DEBUG
+    feign.Logger: DEBUG
 

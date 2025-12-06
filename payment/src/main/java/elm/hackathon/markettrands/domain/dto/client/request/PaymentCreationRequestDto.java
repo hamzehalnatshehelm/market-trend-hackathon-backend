@@ -8,17 +8,17 @@ import java.time.LocalDateTime;
 @Data
 public class PaymentCreationRequestDto {
 
-    private String invoiceNumber;
-    private String accountNumber;
-    private LocalDateTime timeStamp;
+    private String InvoiceNumber;
+    private String AccountNumber;
+    private LocalDateTime TimeStamp;
     /**
      * TransactionType: 1 = SALE, 2 = AUTH
      */
-    private int transactionType;
-    private String operation;
-    private String redirectUrl;
-    private String paymentMethods; // Or use List<String> for better handling
-    private String language;
+    private int TransactionType;
+    private String Operation;
+    private String RedirectUrl;
+    private String PaymentMethods; // Or use List<String> for better handling
+    private String Language;
 
 }
 
