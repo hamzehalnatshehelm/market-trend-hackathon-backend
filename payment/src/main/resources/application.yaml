@@ -78,5 +78,7 @@ feign:
 #        readTimeout: 20000
 #        loggerLevel: BASIC
     payment:
-      url: https://pgx-qa-api.apps.devocp4.elm.sa:443
+      url:  https://pg-beta.api.elm.sa
+    billing:
+      url: https://elmx-bp-beta.api.elm.sa
 

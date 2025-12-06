@@ -1,4 +1,4 @@
-package elm.hackathon.markettrands.client;
+package elm.hackathon.markettrands.client.billing;
 
 import elm.hackathon.markettrands.domain.dto.client.request.CustomerRequestDTO;
 import elm.hackathon.markettrands.domain.dto.client.request.PaymentCreationRequestDto;
@@ -9,14 +9,11 @@ import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
-@FeignClient(   name="ELMPAY-API" ,
-                url= "${feign.client.payment.url}",
-                configuration = ElmPayApiClientConfig.class)
-public interface ElmPayApiClient {
-    @PostMapping(value = "/payment/api/product/createpaymentrequest")
-    PaymentCreationResponseDto createPayment(@RequestBody PaymentCreationRequestDto declarationNumber);
+@FeignClient(   name="ELBillingMPAY-API" ,
+                url= "${feign.client.billing.url}",
+                configuration = ElmBillingPayApiClientConfig.class)
+public interface ElmBillingPayApiClient {
 
-    @PostMapping(value = "/payment/api/product/inquirepaymentrequest")
-    PaymentInquiryResponseDto paymentInquiry(@RequestBody String declarationNumber);
-
+    @PostMapping(value = "/billing/v3/api/invoice/generateinvoicewithcustomer")
+    InquiryResponseDTO createInvoice(@RequestBody CustomerRequestDTO customerRequestDTO);
 }

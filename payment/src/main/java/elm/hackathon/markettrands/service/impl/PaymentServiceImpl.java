@@ -1,6 +1,7 @@
 package elm.hackathon.markettrands.service.impl;
 
 import elm.hackathon.markettrands.client.ElmPayApiClient;
+import elm.hackathon.markettrands.client.billing.ElmBillingPayApiClient;
 import elm.hackathon.markettrands.domain.dto.client.request.CustomerRequestDTO;
 import elm.hackathon.markettrands.domain.dto.client.request.PaymentCreationRequestDto;
 import elm.hackathon.markettrands.domain.dto.client.response.InquiryResponseDTO;
@@ -15,18 +16,20 @@ import java.time.LocalDateTime;
 @RequiredArgsConstructor
 public class PaymentServiceImpl implements PaymentService{
     private final ElmPayApiClient elmPayApiClient;
+    private final ElmBillingPayApiClient elmBillingPayApiClient;
 
     public PaymentCreationResponseDto createInvoice(CustomerRequestDTO customerRequestDTO) {
-        InquiryResponseDTO invoice = elmPayApiClient.createInvoice(customerRequestDTO);
+        InquiryResponseDTO invoice = elmBillingPayApiClient.createInvoice(customerRequestDTO);
         PaymentCreationRequestDto paymentCreationRequestDto = new PaymentCreationRequestDto();
         paymentCreationRequestDto.setInvoiceNumber(invoice.getBody().getData().getResult().getSadadNumber());
         paymentCreationRequestDto.setAccountNumber(invoice.getBody().getData().getResult().getAccountNumber());
         paymentCreationRequestDto.setOperation("pay");
-        paymentCreationRequestDto.setRedirectUrl("");
+        paymentCreationRequestDto.setRedirectUrl("http://localhost:3000/payment-pending");
         paymentCreationRequestDto.setTransactionType(1);
         paymentCreationRequestDto.setPaymentMethods("MASTER,VISA,MADA,APPLEPAY");
         paymentCreationRequestDto.setLanguage("en");
         paymentCreationRequestDto.setTimeStamp(LocalDateTime.now());
+
         PaymentCreationResponseDto payment = elmPayApiClient.createPayment(paymentCreationRequestDto);
         return payment;
     }
