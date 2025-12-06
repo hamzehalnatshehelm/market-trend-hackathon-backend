@@ -1,5 +1,6 @@
 package elm.hackathon.markettrands.markettrends.repository.impl;
 
+import elm.hackathon.markettrands.markettrends.domain.dto.ChartDto;
 import elm.hackathon.markettrands.markettrends.domain.request.MarketTrendsRequestDashboardFilter;
 import elm.hackathon.markettrands.markettrends.repository.MarketTrendsCustomRepository;
 import jakarta.persistence.EntityManager;
@@ -8,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -20,7 +22,7 @@ public class MarketTrendsCustomRepositoryImpl implements MarketTrendsCustomRepos
     private final MarketTrendsQueryBuilder queryBuilder;
 
     @Override
-    public Map<String, String> chart(MarketTrendsRequestDashboardFilter filter) {
+    public List<ChartDto> chart(MarketTrendsRequestDashboardFilter filter) {
         var spec = queryBuilder.buildChartQuery(filter);
         Query q = entityManager.createNativeQuery(spec.sql());
 
@@ -31,6 +33,7 @@ public class MarketTrendsCustomRepositoryImpl implements MarketTrendsCustomRepos
         @SuppressWarnings("unchecked")
         List<Object[]> rows = q.getResultList();
         Map<String, String> result = new LinkedHashMap<>();
+        List<ChartDto> resultList = new ArrayList<>();
         for (Object[] row : rows) {
             String label = (String) row[0];
             String valStr;
@@ -42,9 +45,16 @@ public class MarketTrendsCustomRepositoryImpl implements MarketTrendsCustomRepos
             } else {
                 valStr = "0";
             }
+            resultList.add(
+                    ChartDto
+                            .builder()
+                            .name(label)
+                            .value(valStr)
+                            .build()
+            );
             result.put(label, valStr);
         }
-        return result;
+        return resultList;
     }
 
 }

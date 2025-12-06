@@ -1,11 +1,12 @@
 package elm.hackathon.markettrands.markettrends.repository;
 
+import elm.hackathon.markettrands.markettrends.domain.dto.ChartDto;
 import elm.hackathon.markettrands.markettrends.domain.request.MarketTrendsRequestDashboardFilter;
 
-import java.util.Map;
+import java.util.List;
 
 public interface MarketTrendsCustomRepository {
 
-    Map<String, String> chart(MarketTrendsRequestDashboardFilter filter);
+    List<ChartDto> chart(MarketTrendsRequestDashboardFilter filter);
 
 }
