@@ -4,9 +4,11 @@ spring:
     name: user-management
   datasource:
     url: jdbc:postgresql://localhost:5432/market_trends_db
-    username: user_service
+    username: user_management_user
     password: password
     driver-class-name: org.postgresql.Driver
+    hikari:
+      schema: user_management
   jpa:
     hibernate:
       ddl-auto: none
@@ -15,13 +17,15 @@ spring:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
         globally_quoted_identifiers: false
+        default_schema: user_management
 
 
 
   flyway:
-    user: user_service
+    user: user_management_user
     password: password
     baseline-on-migrate: true
+    default-schema: user_management
 
 
 
